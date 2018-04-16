@@ -41,9 +41,7 @@ module.exports = function () {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
 
-    app.use('/', require('../routes/api.route'));
-
-
+    app.use('/', require('../routes/api.routes'));
 
     var server = app.listen(8081, function () {
         console.log('SOS-REDACAO application listening on port 8081!');

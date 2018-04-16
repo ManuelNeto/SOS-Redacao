@@ -6,6 +6,10 @@
 const express = require('express');
 const router = express.Router();
 
+const user = require('./api/user.route');
+
+router.use('/user', user);
+
 router.get('/', function (req, res) {
 	res.send('<h1>\\\\\\SOS-REDACAO</h1><h4>Lorem ipsum dolor.</h4>');
 });
