@@ -7,8 +7,10 @@ const express = require('express');
 const router = express.Router();
 
 const user = require('./api/user.route');
+const login = require('./api/login.route');
 
 router.use('/user', user);
+router.use('/login', login);
 
 router.get('/', function (req, res) {
 	res.send('<h1>\\\\\\SOS-REDACAO</h1><h4>Lorem ipsum dolor.</h4>');

@@ -40,7 +40,7 @@ let UserSchema = new mongoose.Schema({
     gender: {
         type: String,
         required: true,
-        enum: ['Masculino, Feminino']
+        //enum: ['Masculino, Feminino'],
         trim: true
     },
 
@@ -77,11 +77,6 @@ let UserSchema = new mongoose.Schema({
     photo: {
         type: String,
         trim: true
-    },
-
-    password: {
-        type: String,
-        required: true
     }
 });
 
