@@ -7,6 +7,9 @@ const mongoose = require('mongoose');
 const mongoErrors = require('mongo-errors');
 const express = require('express');
 const router = express.Router();
+const responses = require('../util/responses');
+const jwt = require('jsonwebtoken');
+
 
 const User = require('../models/user.model');
 
@@ -41,8 +44,12 @@ exports.createUser = function (req, res) {
           console.log(err);
           return next(err);
       }
+
         res.end()
   });
+
+  let token = jwt.sign({id: user._id}, 'dna8A7D8A7y8d&H*&d*&*D7', {expiresIn: 86400});
+  return responses.created(res, 'SUCCESSFUL_USER_CREATION', {name: user.name, token: token});
 };
 
 exports.editUser = function (req, res) {
