@@ -10,7 +10,7 @@ let UserController = require('../../controllers/user.controller');
 
 router.get('/', tokenValidator, UserController.getAll);
 router.get('/:id', tokenValidator, UserController.getUser);
-router.post('/', tokenValidator, UserController.createUser);
+router.post('/', UserController.createUser);
 router.put('/', tokenValidator, UserController.editUser);
 router.delete('/:id', tokenValidator, UserController.deleteUser);
 
