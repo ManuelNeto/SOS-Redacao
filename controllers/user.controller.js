@@ -17,21 +17,26 @@ const User = require('../models/user.model');
 exports.getAll = function (req, res) {
 
   User.find(function (err, users) {
-    if (err) return console.error(err);
-      res.send(users);
-    });
+    if(err) return responses.internalError(res);
+
+    else if(!users){
+      return responses.notFound(res, 'USERS_NOT_FOUND');
+    }
+    return responses.ok(res, '', users);
+  });
+
 };
 
 exports.getUser = function(req, res, next) {
 
   User.findOne({_id: req.params.id}, function(err, user) {
-    if (err) {
-      res.sendStatus(404);
-      return next(err);
-    }
-      var r = res.send(user);
 
-      return next();
+    if(err) return responses.internalError(res);
+
+    else if(!user){
+      return responses.notFound(res, 'USER_NOT_FOUND');
+    }
+      return responses.ok(res, '', user);
     });
 };
 
@@ -56,22 +61,33 @@ exports.editUser = function (req, res) {
 
   var user = new User(req.body);
 
-  User.findOneAndUpdate({_id: req.body._id}, user, {upsert: true, 'new': true}, function (err, doc) {
-    if (err) console.log(err);
-      res.send(doc);
-    });
+  if(!user){
+    return responses.badRequest(res, 'USER_REQUIRED');
+  }
+
+  User.findOneAndUpdate({_id: req.body._id}, user, {upsert: true, 'new': true}, function (err, updatedUser) {
+
+    if(err){
+      if (err.code === mongoErrors.DuplicateKey) {
+                return responses.badRequest(res, "DUPLICATE_NETWORK_NAME");
+      }
+      return responses.internalError(res);
+    }
+
+    return responses.ok(res, 'UPDATED_USER', updatedUser);
+  });
+
 };
 
 exports.deleteUser =  function(req, res, next) {
 
-    User.remove({_id: req.params.id}, function(err) {
-        if (err) {
-            res.sendStatus(404);
-            return next(err);
-        }
-        res.end();
+    if(!req.params.id){
+      return responses.badRequest(res, 'USER_REQUIRED');
+    }
 
-        return next();
+    User.remove({_id: req.params.id}, function(err) {
+        if(err) return responses.internalError(res);
+        return responses.ok(res, 'REMOVED_USER');
     });
 
 };
