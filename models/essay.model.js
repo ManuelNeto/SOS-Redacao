@@ -7,6 +7,12 @@ let mongoose = require('mongoose');
 
 let EssaySchema = new mongoose.Schema({
 
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+
     theme: {
         type: String,
         required: true,
