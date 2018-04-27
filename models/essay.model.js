@@ -38,6 +38,6 @@ let EssaySchema = new mongoose.Schema({
     }
 });
 
-const Essay = mongoose.model('Essay', UserSchema);
+const Essay = mongoose.model('Essay', EssaySchema);
 
 module.exports = Essay;
