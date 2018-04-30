@@ -44,16 +44,17 @@ exports.createEssay = function (req, res) {
 
   var essay = new Essay(req.body);
 
+  if(!essay){
+    return responses.badRequest(res, 'ESSAY_REQUIRED');
+  }
+
   essay.save(function (err, next) {
       if (err) {
-          console.log(err);
-          return next(err);
+          return responses.internalError(res);
       }
-
-        res.end()
+        return responses.created(res, 'SUCCESSFUL_ESSAY_CREATION', essay);
   });
 
-  return responses.created(res, 'SUCCESSFUL_ESSAY_CREATION', essay);
 };
 
 exports.editEssay = function (req, res) {
