@@ -69,7 +69,7 @@ exports.editUser = function (req, res) {
 
     if(err){
       if (err.code === mongoErrors.DuplicateKey) {
-                return responses.badRequest(res, "DUPLICATE_NETWORK_NAME");
+                return responses.badRequest(res, "DUPLICATE_EMAIL");
       }
       return responses.internalError(res);
     }
