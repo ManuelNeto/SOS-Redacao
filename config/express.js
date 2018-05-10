@@ -43,8 +43,8 @@ module.exports = function () {
 
     app.use('/', require('../routes/api.routes'));
 
-    var server = app.listen(8081, function () {
-        console.log('SOS-REDACAO application listening on port 8081!');
+    var server = app.listen(8080, function () {
+        console.log('SOS-REDACAO application listening on port 8080!');
     });
 
     var io = require('socket.io').listen(server);
