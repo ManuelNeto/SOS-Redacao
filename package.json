@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "c"
+    "test": "c",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
