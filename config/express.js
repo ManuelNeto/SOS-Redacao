@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 
 //var fs = require('fs');
 var http = require('http');
+const PORT = process.env.PORT || 5000
 
 module.exports = function () {
 
@@ -43,8 +44,8 @@ module.exports = function () {
 
     app.use('/', require('../routes/api.routes'));
 
-    var server = app.listen(8080, function () {
-        console.log('SOS-REDACAO application listening on port 8080!');
+    var server = app.listen(PORT, function () {
+        console.log(`SOS-REDACAO application listening on port ${PORT}!`);
     });
 
     var io = require('socket.io').listen(server);
