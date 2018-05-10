@@ -29,5 +29,8 @@
     "node-schedule": "^1.1.1",
     "nodemon": "^1.11.0",
     "socket.io": "^2.1.0"
+  },
+  "engines": {
+    "node": "8.9.4"
   }
 }
