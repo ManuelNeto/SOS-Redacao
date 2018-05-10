@@ -2,7 +2,7 @@ var express = require("express");
 var load = require('express-load');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-//var cors = require('cors');
+var cors = require('cors');
 
 //var fs = require('fs');
 var http = require('http');
@@ -27,7 +27,7 @@ module.exports = function () {
             saveUninitialized: false
         }));
 
-   // app.use(cors({credentials: true}));
+    app.use(cors({credentials: true}));
 
 
 

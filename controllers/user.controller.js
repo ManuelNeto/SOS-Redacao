@@ -7,6 +7,9 @@ const mongoose = require('mongoose');
 const mongoErrors = require('mongo-errors');
 const express = require('express');
 const router = express.Router();
+const responses = require('../util/responses');
+const jwt = require('jsonwebtoken');
+
 
 const User = require('../models/user.model');
 
@@ -14,21 +17,26 @@ const User = require('../models/user.model');
 exports.getAll = function (req, res) {
 
   User.find(function (err, users) {
-    if (err) return console.error(err);
-      res.send(users);
-    });
+    if(err) return responses.internalError(res);
+
+    else if(!users){
+      return responses.notFound(res, 'USERS_NOT_FOUND');
+    }
+    return responses.ok(res, '', users);
+  });
+
 };
 
 exports.getUser = function(req, res, next) {
 
   User.findOne({_id: req.params.id}, function(err, user) {
-    if (err) {
-      res.sendStatus(404);
-      return next(err);
-    }
-      var r = res.send(user);
 
-      return next();
+    if(err) return responses.internalError(res);
+
+    else if(!user){
+      return responses.notFound(res, 'USER_NOT_FOUND');
+    }
+      return responses.ok(res, '', user);
     });
 };
 
@@ -41,30 +49,45 @@ exports.createUser = function (req, res) {
           console.log(err);
           return next(err);
       }
+
         res.end()
   });
+
+  let token = jwt.sign({id: user._id}, 'dna8A7D8A7y8d&H*&d*&*D7', {expiresIn: 86400});
+  return responses.created(res, 'SUCCESSFUL_USER_CREATION', {name: user.name, token: token});
 };
 
 exports.editUser = function (req, res) {
 
   var user = new User(req.body);
 
-  User.findOneAndUpdate({_id: req.body._id}, user, {upsert: true, 'new': true}, function (err, doc) {
-    if (err) console.log(err);
-      res.send(doc);
-    });
+  if(!user){
+    return responses.badRequest(res, 'USER_REQUIRED');
+  }
+
+  User.findOneAndUpdate({_id: req.body._id}, user, {upsert: true, 'new': true}, function (err, updatedUser) {
+
+    if(err){
+      if (err.code === mongoErrors.DuplicateKey) {
+                return responses.badRequest(res, "DUPLICATE_EMAIL");
+      }
+      return responses.internalError(res);
+    }
+
+    return responses.ok(res, 'UPDATED_USER', updatedUser);
+  });
+
 };
 
 exports.deleteUser =  function(req, res, next) {
 
-    User.remove({_id: req.params.id}, function(err) {
-        if (err) {
-            res.sendStatus(404);
-            return next(err);
-        }
-        res.end();
+    if(!req.params.id){
+      return responses.badRequest(res, 'USER_REQUIRED');
+    }
 
-        return next();
+    User.remove({_id: req.params.id}, function(err) {
+        if(err) return responses.internalError(res);
+        return responses.ok(res, 'REMOVED_USER');
     });
 
 };

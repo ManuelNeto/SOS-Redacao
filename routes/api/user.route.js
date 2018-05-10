@@ -5,13 +5,13 @@
 
 let express = require('express');
 let router = express.Router();
-
+let tokenValidator = require('../../util/token.validator');
 let UserController = require('../../controllers/user.controller');
 
-router.get('/', UserController.getAll);
-router.get('/:id', UserController.getUser);
+router.get('/', tokenValidator, UserController.getAll);
+router.get('/:id', tokenValidator, UserController.getUser);
 router.post('/', UserController.createUser);
-router.put('/', UserController.editUser);
-router.delete('/:id', UserController.deleteUser);
+router.put('/', tokenValidator, UserController.editUser);
+router.delete('/:id', tokenValidator, UserController.deleteUser);
 
 module.exports = router;

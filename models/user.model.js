@@ -77,11 +77,6 @@ let UserSchema = new mongoose.Schema({
     photo: {
         type: String,
         trim: true
-    },
-
-    password: {
-        type: String,
-        required: true
     }
 });
 
