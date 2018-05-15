@@ -35,7 +35,23 @@ let EssaySchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+
+    status: {
+        type: String,
+        enum: ['Aguardando correção', 'Corrigida', 'Aguardando recorreção'],
+        default: 'Aguardando correção',
+        required: true,
+        trim: true
+    },
+
+    scores: {
+      type: Array,
+      trim: true
     }
+
+
+
 });
 
 const Essay = mongoose.model('Essay', EssaySchema);
