@@ -40,6 +40,11 @@ exports.getEssay = function(req, res, next) {
     });
 };
 
+exports.downloadEssayModel = function(req, res) {
+  res.download('../SOS-Redacao_BackEnd/img/modeloDeRedacao.JPG', 'modeloDeRedacao.JPG');
+  //return responses.ok(res, 'SUCESS_DOWNLOAD', null);
+};
+
 exports.createEssay = function (req, res) {
 
   var essay = new Essay(req.body);
@@ -91,6 +96,8 @@ exports.deleteEssay =  function(req, res, next) {
     });
 
 };
+
+
 
 exports.param = function (req, res, next, _id) {
     var query = Essay.findById(_id);
