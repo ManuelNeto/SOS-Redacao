@@ -2,6 +2,7 @@
 /*global require, exports, module */
 /*eslint no-console: 0 */
 /* jshint strict: false */
+var crypto = require('crypto');
 
 let mongoose = require('mongoose');
 
@@ -18,11 +19,6 @@ let UserSchema = new mongoose.Schema({
             },
             message: "INVALID_EMAIL"
         },
-    },
-
-    password: {
-        type: String,
-        required: true
     },
 
     name: {
@@ -77,8 +73,23 @@ let UserSchema = new mongoose.Schema({
     photo: {
         type: String,
         trim: true
-    }
+    },
+
+    hash: String,
+    salt: String
 });
+
+UserSchema.methods.setPassword = function (password){
+    this.salt = crypto.randomBytes(16).toString('hex');
+    UserSchema.salt = this.salt;
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex');
+    UserSchema.hash = this.hash;
+};
+
+UserSchema.methods.validPassword = function(password) {
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex');
+    return this.hash === hash;
+};
 
 const User = mongoose.model('User', UserSchema);
 

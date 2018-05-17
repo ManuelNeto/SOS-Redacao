@@ -27,11 +27,22 @@ exports.login = function (req, res) {
             return responses.notFound(res, 'USER_NOT_FOUND');
         }
 
-        if (!(user.password === password)) {
+        if (!(user.validPassword(password))) {
             return responses.unauthorized(res, 'INVALID_CREDENTIALS');
         }
 
-        let token = jwt.sign({id: user._id}, 'dna8A7D8A7y8d&H*&d*&*D7', {expiresIn: 86400});
+        let token = jwt.sign({
+            id: user._id,
+            name: user.name,
+            userName: user.userName,
+            gender: user.gender,
+            birthdate: user.birthdate,
+            school: user.school,
+            degreeOfSchooling: user.degreeOfSchooling,
+            userKind: user.userKind,
+            correctorKind: user.correctorKind,
+            email: user.email
+        }, 'dna8A7D8A7y8d&H*&d*&*D7', {expiresIn: 86400});
 
         return responses.ok(res, 'USER_AUTHENTICATED', {
             auth: true,

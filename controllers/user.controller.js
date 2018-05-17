@@ -42,19 +42,26 @@ exports.getUser = function(req, res, next) {
 
 exports.createUser = function (req, res) {
 
-  var user = new User(req.body);
+  if (req.body.password === '' || !req.body.password){
+      res.status(400).send({ error: "Senha vazia" });
+  } else {
+      var password = req.body.password;
+      delete req.body.password;
+      var user = new User(req.body);
+      user.setPassword(password);
 
-  user.save(function (err, next) {
-      if (err) {
-          console.log(err);
-          return next(err);
-      }
+      user.save(function (err, next) {
+          if (err) {
+              console.log(err);
+              return next(err);
+          }
 
-        res.end()
-  });
+          res.end()
+      });
 
-  let token = jwt.sign({id: user._id}, 'dna8A7D8A7y8d&H*&d*&*D7', {expiresIn: 86400});
-  return responses.created(res, 'SUCCESSFUL_USER_CREATION', {name: user.name, token: token});
+      let token = jwt.sign({id: user._id}, 'dna8A7D8A7y8d&H*&d*&*D7', {expiresIn: 86400});
+      return responses.created(res, 'SUCCESSFUL_USER_CREATION', {name: user.name, token: token});
+  }
 };
 
 exports.editUser = function (req, res) {
