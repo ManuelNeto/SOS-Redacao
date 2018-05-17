@@ -33,7 +33,6 @@ let EssaySchema = new mongoose.Schema({
 
     text: {
         type: String,
-        required: true,
         trim: true
     },
 
@@ -48,9 +47,11 @@ let EssaySchema = new mongoose.Schema({
     scores: {
       type: Array,
       trim: true
+    },
+
+    essayImage: {
+        type: String
     }
-
-
 
 });
 
