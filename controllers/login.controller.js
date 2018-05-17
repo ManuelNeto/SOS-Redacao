@@ -27,7 +27,7 @@ exports.login = function (req, res) {
             return responses.notFound(res, 'USER_NOT_FOUND');
         }
 
-        if (!(user.password === password)) {
+        if (!(user.validPassword(password))) {
             return responses.unauthorized(res, 'INVALID_CREDENTIALS');
         }
 
