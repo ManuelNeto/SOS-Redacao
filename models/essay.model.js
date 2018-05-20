@@ -49,6 +49,14 @@ let EssaySchema = new mongoose.Schema({
       trim: true
     },
 
+    messages: {
+      type: [{
+          email: {type: String, required: true},
+          text: {type: String, required: true},
+          timestamp: {type: String, required: true}
+      }]
+    },
+
     essayImage: {
         type: String
     }
