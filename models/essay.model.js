@@ -57,7 +57,8 @@ let EssaySchema = new mongoose.Schema({
 
     scores: {
       type: Array,
-      trim: true
+      trim: true,
+      default: [0,0,0,0,0,0]
     },
 
     messages: {
