@@ -41,9 +41,7 @@ exports.getEssay = function(req, res, next) {
 };
 
 exports.downloadEssayModel = function(req, res) {
-  console.log('download');
   res.download('../SOS-Redacao_BackEnd/img/modeloDeRedacao.JPG', 'modeloDeRedacao.JPG');
-  //return responses.ok(res, 'SUCESS_DOWNLOAD', null);
 };
 
 exports.createEssay = function (req, res) {
