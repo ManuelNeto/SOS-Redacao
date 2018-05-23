@@ -13,6 +13,17 @@ let EssaySchema = new mongoose.Schema({
         required: true
     },
 
+    corrector: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+
+    comment: {
+      type: String,
+      trim: true
+    },
+
     theme: {
         type: String,
         required: true,
@@ -46,7 +57,8 @@ let EssaySchema = new mongoose.Schema({
 
     scores: {
       type: Array,
-      trim: true
+      trim: true,
+      default: [0,0,0,0,0,0]
     },
 
     messages: {

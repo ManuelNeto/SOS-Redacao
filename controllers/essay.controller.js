@@ -40,10 +40,36 @@ exports.getEssay = function(req, res, next) {
     });
 };
 
+exports.getMyEssays = function(req, res, next) {
+
+  Essay.find({user: req.params.id}, function(err, essays) {
+
+    if(err) return responses.internalError(res);
+
+    else if(!essays){
+      return responses.notFound(res, 'ESSAYS_NOT_FOUND');
+    }
+      return responses.ok(res, '', essays);
+    });
+};
+
+exports.essaysToCorect = function(req, res, next) {
+
+  console.log('oi');
+
+  Essay.find({status: "Aguardando correção"}, function(err, essays) {
+
+    if(err) return responses.internalError(res);
+
+    else if(!essays){
+      return responses.notFound(res, 'ESSAYS_NOT_FOUND');
+    }
+      return responses.ok(res, '', essays);
+    });
+};
+
 exports.downloadEssayModel = function(req, res) {
-  console.log('download');
   res.download('../SOS-Redacao_BackEnd/img/modeloDeRedacao.JPG', 'modeloDeRedacao.JPG');
-  //return responses.ok(res, 'SUCESS_DOWNLOAD', null);
 };
 
 exports.createEssay = function (req, res) {
