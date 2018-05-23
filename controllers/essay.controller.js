@@ -40,6 +40,19 @@ exports.getEssay = function(req, res, next) {
     });
 };
 
+exports.getMyEssays = function(req, res, next) {
+
+  Essay.find({user: req.params.id}, function(err, essays) {
+
+    if(err) return responses.internalError(res);
+
+    else if(!essays){
+      return responses.notFound(res, 'ESSAY_NOT_FOUND');
+    }
+      return responses.ok(res, '', essays);
+    });
+};
+
 exports.downloadEssayModel = function(req, res) {
   res.download('../SOS-Redacao_BackEnd/img/modeloDeRedacao.JPG', 'modeloDeRedacao.JPG');
 };

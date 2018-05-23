@@ -11,6 +11,7 @@ let EssayController = require('../../controllers/essay.controller');
 
 router.get('/', tokenValidator, EssayController.getAll);
 router.get('/:id', tokenValidator, EssayController.getEssay);
+router.get('/myEssays/:id', tokenValidator, EssayController.getMyEssays);
 router.post('/', tokenValidator, EssayController.createEssay);
 router.put('/', tokenValidator, EssayController.editEssay);
 router.delete('/:id', tokenValidator, EssayController.deleteEssay);
