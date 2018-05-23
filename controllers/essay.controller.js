@@ -47,7 +47,22 @@ exports.getMyEssays = function(req, res, next) {
     if(err) return responses.internalError(res);
 
     else if(!essays){
-      return responses.notFound(res, 'ESSAY_NOT_FOUND');
+      return responses.notFound(res, 'ESSAYS_NOT_FOUND');
+    }
+      return responses.ok(res, '', essays);
+    });
+};
+
+exports.essaysToCorect = function(req, res, next) {
+
+  console.log('oi');
+
+  Essay.find({status: "Aguardando correção"}, function(err, essays) {
+
+    if(err) return responses.internalError(res);
+
+    else if(!essays){
+      return responses.notFound(res, 'ESSAYS_NOT_FOUND');
     }
       return responses.ok(res, '', essays);
     });
