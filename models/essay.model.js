@@ -13,6 +13,16 @@ let EssaySchema = new mongoose.Schema({
         required: true
     },
 
+    corrector: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+
+    comment: {
+      type: String,
+      trim: true
+    },
+
     theme: {
         type: String,
         required: true,
@@ -46,7 +56,16 @@ let EssaySchema = new mongoose.Schema({
 
     scores: {
       type: Array,
-      trim: true
+      trim: true,
+      default: [0,0,0,0,0,0]
+    },
+
+    messages: {
+      type: [{
+          email: {type: String, required: true},
+          text: {type: String, required: true},
+          timestamp: {type: String, required: true}
+      }]
     },
 
     essayImage: {

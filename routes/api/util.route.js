@@ -8,7 +8,7 @@ let router = express.Router();
 let tokenValidator = require('../../util/token.validator');
 let EssayController = require('../../controllers/essay.controller');
 
-router.get('/', tokenValidator, EssayController.downloadEssayModel);
+router.get('/', EssayController.downloadEssayModel);
 
 
 module.exports = router;
