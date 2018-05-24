@@ -15,8 +15,7 @@ let EssaySchema = new mongoose.Schema({
 
     corrector: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        ref: 'User'
     },
 
     comment: {
