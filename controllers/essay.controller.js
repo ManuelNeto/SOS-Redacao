@@ -42,7 +42,7 @@ exports.getEssay = function(req, res, next) {
 
 exports.getMyEssays = function(req, res, next) {
 
-  Essay.find({user: req.params.id}, function(err, essays) {
+  Essay.find({user: req.params.id} || {corrector: req.params.id}, function(err, essays) {
 
     if(err) return responses.internalError(res);
 
