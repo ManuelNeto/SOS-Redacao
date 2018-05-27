@@ -11,5 +11,5 @@ const responses = require('../util/responses');
 const jwt = require('jsonwebtoken');
 
 exports.downloadStudyMaterial = function(req, res) {
-  res.download('../SOS-Redacao_BackEnd/downloads/' + req.body.fileName, req.body.fileName);
+  res.download('../SOS-Redacao_BackEnd/downloads' + req.url);
 };
