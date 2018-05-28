@@ -12,6 +12,7 @@ router.get('/', tokenValidator, UserController.getAll);
 router.get('/:id', tokenValidator, UserController.getUser);
 router.post('/', UserController.createUser);
 router.put('/', tokenValidator, UserController.editUser);
+// TODO: router.put('/', tokenValidator, PhotoUtil.handlePhoto, UserController.editUser);
 router.delete('/:id', tokenValidator, UserController.deleteUser);
 
 module.exports = router;

@@ -71,8 +71,8 @@ let UserSchema = new mongoose.Schema({
     },
 
     photo: {
-        type: String,
-        trim: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Photo'
     },
 
     hash: String,
