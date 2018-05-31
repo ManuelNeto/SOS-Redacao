@@ -72,6 +72,15 @@ exports.editUser = function (req, res) {
     return responses.badRequest(res, 'USER_REQUIRED');
   }
 
+  if (req.body.hasOwnProperty('pass')) {
+    if (!(user.validPassword(req.body.pass))) {
+      return responses.unauthorized(res, 'INVALID_CREDENTIALS');
+    }
+    if (req.body.hasOwnProperty('npass')) {
+      user.setPassword(req.body.npass);
+    }
+  }
+
   User.findOneAndUpdate({_id: req.body._id}, user, {upsert: true, 'new': true}, function (err, updatedUser) {
 
     if(err){
