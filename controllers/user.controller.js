@@ -52,15 +52,15 @@ exports.createUser = function (req, res) {
 
       user.save(function (err, next) {
           if (err) {
-              console.log(err);
-              return next(err);
+              return responses.badRequest(res, "DUPLICATE_EMAIL");
           }
 
-          res.end()
+          let token = jwt.sign({id: next._id}, 'dna8A7D8A7y8d&H*&d*&*D7', {expiresIn: 86400});
+          return responses.created(res, 'SUCCESSFUL_USER_CREATION', {name: user.name, token: token});
+
+          // res.end()
       });
 
-      let token = jwt.sign({id: user._id}, 'dna8A7D8A7y8d&H*&d*&*D7', {expiresIn: 86400});
-      return responses.created(res, 'SUCCESSFUL_USER_CREATION', {name: user.name, token: token});
   }
 };
 
