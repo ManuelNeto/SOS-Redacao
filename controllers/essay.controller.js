@@ -55,8 +55,6 @@ exports.getMyEssays = function(req, res, next) {
 
 exports.essaysToCorect = function(req, res, next) {
 
-  console.log('oi');
-
   Essay.find({status: "Aguardando correção"}, function(err, essays) {
 
     if(err) return responses.internalError(res);
@@ -69,7 +67,7 @@ exports.essaysToCorect = function(req, res, next) {
 };
 
 exports.downloadEssayModel = function(req, res) {
-  res.download('../SOS-Redacao_BackEnd/img/modeloDeRedacao.JPG', 'modeloDeRedacao.JPG');
+  res.download('../SOS-Redacao_BackEnd/downloads/modeloDeRedacao.JPG', 'modeloDeRedacao.JPG');
 };
 
 exports.createEssay = function (req, res) {
