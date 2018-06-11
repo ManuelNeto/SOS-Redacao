@@ -9,19 +9,22 @@ let ThemeSchema = new mongoose.Schema({
 
   theme: {
       type: String,
-      required: true
+      required: true,
+      unique: true,
+      trim: true
 
   },
 
   supporting_texts: {
       type: [{
-          text: {type: String, required: true},
-          image: {type: String, required: true}
+          text: {type: String, required: true, trim: true},
+          image: {type: String, required: true, trim: true}
       }]
   }
 
 });
 
-const Essay = mongoose.model('Theme', ThemeSchema);
+
+const Theme = mongoose.model('Theme', ThemeSchema);
 
 module.exports = Theme;
