@@ -27,6 +27,19 @@ exports.getAll = function (req, res) {
 
 };
 
+exports.getThemesProposedBy = function (req, res) {
+  console.log(req.params.id);
+  Theme.find({proposedBy: req.params.id},function (err, themes) {
+    if(err) return responses.internalError(res);
+
+    else if(!themes){
+      return responses.notFound(res, 'THEMES_NOT_FOUND');
+    }
+    return responses.ok(res, '', themes);
+  });
+
+};
+
 exports.getTheme = function(req, res, next) {
 
   Theme.findOne({_id: req.params.id}, function(err, theme) {
