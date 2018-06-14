@@ -9,11 +9,13 @@ const router = express.Router();
 const user = require('./api/user.route');
 const login = require('./api/login.route');
 const essay = require('./api/essay.route');
+const theme = require('./api/theme.route');
 const downloads = require('./api/downloads.route');
 
 router.use('/user', user);
 router.use('/login', login);
 router.use('/essay', essay);
+router.use('/theme', theme);
 router.use('/downloads', downloads);
 
 router.get('/', function (req, res) {
