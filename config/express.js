@@ -39,8 +39,12 @@ module.exports = function () {
     app.engine('html', require('ejs').renderFile);
     app.set('views', './views');
 
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
+    // app.use(bodyParser.urlencoded({ extended: true }));
+    // app.use(bodyParser.json());
+
+    // var bodyParser = require('body-parser');
+    app.use(bodyParser.json({limit: '50mb'}));
+    app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
     app.use('/', require('../routes/api.routes'));
 
