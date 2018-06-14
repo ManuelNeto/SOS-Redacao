@@ -66,11 +66,22 @@ exports.createUser = function (req, res) {
 
 exports.editUser = function (req, res) {
 
-  var user = new User(req.body);
+  var password = "";
+  if (req.body.password){
+      password = req.body.password;
+      delete req.body.password;
+      delete req.body.cpassword;
+  }
+    delete  req.body.__v;
 
+  var user = new User(req.body);
+  
   if(!user){
     return responses.badRequest(res, 'USER_REQUIRED');
   }
+
+    if (password && password !== '')
+        user.setPassword(password)
 
   User.findOneAndUpdate({_id: req.body._id}, user, {upsert: true, 'new': true}, function (err, updatedUser) {
 
@@ -78,6 +89,7 @@ exports.editUser = function (req, res) {
       if (err.code === mongoErrors.DuplicateKey) {
                 return responses.badRequest(res, "DUPLICATE_EMAIL");
       }
+
       return responses.internalError(res);
     }
 
