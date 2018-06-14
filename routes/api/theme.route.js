@@ -11,6 +11,7 @@ let ThemeController = require('../../controllers/theme.controller');
 router.get('/', tokenValidator, ThemeController.getAll);
 router.get('/:id', tokenValidator, ThemeController.getTheme);
 router.post('/', tokenValidator, ThemeController.createTheme);
+router.get('/proposedBy/:id', tokenValidator, ThemeController.getThemesProposedBy);
 router.put('/', tokenValidator, ThemeController.editTheme);
 router.delete('/:id', tokenValidator, ThemeController.deleteTheme);
 
