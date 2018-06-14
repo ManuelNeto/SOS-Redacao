@@ -20,7 +20,13 @@ let ThemeSchema = new mongoose.Schema({
           text: {type: String, required: true, trim: true},
           image: {type: String, required: true, trim: true}
       }]
-  }
+  },
+
+    proposedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 
 });
 
