@@ -36,7 +36,7 @@ exports.getThemesProposedBy = function (req, res) {
       return responses.notFound(res, 'THEMES_NOT_FOUND');
     }
     return responses.ok(res, '', themes);
-  });
+  }).populate('proposedBy', 'name');
 
 };
 
