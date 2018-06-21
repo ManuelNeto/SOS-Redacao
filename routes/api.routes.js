@@ -10,13 +10,13 @@ const user = require('./api/user.route');
 const login = require('./api/login.route');
 const essay = require('./api/essay.route');
 const theme = require('./api/theme.route');
-const downloads = require('./api/downloads.route');
+const studyMaterial = require('./api/studyMaterial.route');
 
 router.use('/user', user);
 router.use('/login', login);
 router.use('/essay', essay);
 router.use('/theme', theme);
-router.use('/downloads', downloads);
+router.use('/study-material', studyMaterial);
 
 router.get('/', function (req, res) {
 	res.send('<h1>\\\\\\SOS-REDACAO</h1><h4>Lorem ipsum dolor.</h4>');
