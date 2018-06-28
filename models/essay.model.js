@@ -24,9 +24,9 @@ let EssaySchema = new mongoose.Schema({
     },
 
     theme: {
-        type: String,
-        required: true,
-        trim: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Theme',
+        required: true
     },
 
     type: {

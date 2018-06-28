@@ -13,6 +13,7 @@ router.get('/', tokenValidator, EssayController.getAll);
 router.get('/:id', tokenValidator, EssayController.getEssay);
 router.get('/toCorect/', tokenValidator, EssayController.essaysToCorect);
 router.get('/myEssays/:id', tokenValidator, EssayController.getMyEssays);
+router.get('/correctedEssays/:id', tokenValidator, EssayController.getMyCorrectedEssays);
 router.post('/', tokenValidator, EssayController.createEssay);
 router.put('/', tokenValidator, EssayController.editEssay);
 router.delete('/:id', tokenValidator, EssayController.deleteEssay);

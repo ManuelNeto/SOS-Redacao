@@ -23,7 +23,7 @@ exports.getAll = function (req, res) {
       return responses.notFound(res, 'ESSAYS_NOT_FOUND');
     }
     return responses.ok(res, '', essays);
-  });
+  }).populate('theme');
 
 };
 
@@ -37,7 +37,7 @@ exports.getEssay = function(req, res, next) {
       return responses.notFound(res, 'ESSAY_NOT_FOUND');
     }
       return responses.ok(res, '', essay);
-    });
+    }).populate('theme');
 };
 
 exports.getMyEssays = function(req, res, next) {
@@ -50,8 +50,22 @@ exports.getMyEssays = function(req, res, next) {
       return responses.notFound(res, 'ESSAYS_NOT_FOUND');
     }
       return responses.ok(res, '', essays);
+    }).populate('theme');
+};
+
+exports.getMyCorrectedEssays = function(req, res, next) {
+
+  Essay.find({status: "Corrigida", user: req.params.id}, function(err, essays) {
+
+    if(err) return responses.internalError(res);
+
+    else if(!essays){
+      return responses.notFound(res, 'ESSAYS_NOT_FOUND');
+    }
+      return responses.ok(res, '', essays);
     });
 };
+
 
 exports.essaysToCorect = function(req, res, next) {
 
