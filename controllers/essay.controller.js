@@ -23,7 +23,7 @@ exports.getAll = function (req, res) {
       return responses.notFound(res, 'ESSAYS_NOT_FOUND');
     }
     return responses.ok(res, '', essays);
-  });
+  }).populate('theme');
 
 };
 
@@ -50,7 +50,7 @@ exports.getMyEssays = function(req, res, next) {
       return responses.notFound(res, 'ESSAYS_NOT_FOUND');
     }
       return responses.ok(res, '', essays);
-    });
+    }).populate('theme');
 };
 
 exports.getMyCorrectedEssays = function(req, res, next) {
