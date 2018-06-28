@@ -37,7 +37,7 @@ exports.getEssay = function(req, res, next) {
       return responses.notFound(res, 'ESSAY_NOT_FOUND');
     }
       return responses.ok(res, '', essay);
-    });
+    }).populate('theme');
 };
 
 exports.getMyEssays = function(req, res, next) {
