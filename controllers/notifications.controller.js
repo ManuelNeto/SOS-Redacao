@@ -11,7 +11,7 @@ const responses = require('../util/responses');
 const jwt = require('jsonwebtoken');
 
 
-const Notification = require('../models/notification.model');
+const Notification = require('../models/notifications.model');
 
 
 exports.getNotifications = function (req, res) {

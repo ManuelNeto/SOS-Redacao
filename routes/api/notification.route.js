@@ -6,7 +6,7 @@
 let express = require('express');
 let router = express.Router();
 let tokenValidator = require('../../util/token.validator');
-let NotificationController = require('../../controllers/notification.controller');
+let NotificationController = require('../../controllers/notifications.controller');
 
 
 
