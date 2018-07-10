@@ -15,7 +15,7 @@ const Notification = require('../models/notifications.model');
 
 
 exports.getNotifications = function (req, res) {
-  Notification.find({receiver: req.params.id},function (err, notifications) {
+  Notification.find({ $or: [{receiver: req.params.id}, {toAll: true}] },function (err, notifications) {
     if(err) return responses.internalError(res);
 
     else if(!notifications){

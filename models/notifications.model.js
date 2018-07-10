@@ -40,6 +40,11 @@ let NotificationSchema = new mongoose.Schema({
       type: String,
       trim: true,
       required: true
+    },
+
+    toAll: {
+      type: Boolean,
+      default: false
     }
 
 });
