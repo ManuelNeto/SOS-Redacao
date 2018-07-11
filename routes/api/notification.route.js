@@ -10,7 +10,7 @@ let NotificationController = require('../../controllers/notifications.controller
 
 
 
-router.get('/:id', tokenValidator, NotificationController.getNotifications);
+router.get('/:id/:kind', tokenValidator, NotificationController.getNotifications);
 router.post('/', tokenValidator, NotificationController.createNotification);
 router.delete('/:id', tokenValidator, NotificationController.deleteNotification);
 
